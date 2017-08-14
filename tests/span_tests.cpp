@@ -223,6 +223,13 @@ TEST_CASE("from_pointer_length_constructor")
         auto workaround_macro = [=]() { make_span(p, 2); };
         CHECK_THROWS_AS(workaround_macro(), fail_fast);
     }
+    
+    {
+        // Tests disambiguation with the pointer-pointer constructor
+        int* p = nullptr;
+        span<int> s(p, 0);
+        CHECK((s.length() == 0 && s.data() == nullptr));
+    }
 }
 
 TEST_CASE("from_pointer_pointer_constructor")
