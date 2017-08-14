@@ -346,6 +346,7 @@ public:
 
     constexpr span(pointer ptr, index_type count) : storage_(ptr, count) {}
 
+    template <class = void>
     constexpr span(pointer firstElem, pointer lastElem)
         : storage_(firstElem, std::distance(firstElem, lastElem))
     {
